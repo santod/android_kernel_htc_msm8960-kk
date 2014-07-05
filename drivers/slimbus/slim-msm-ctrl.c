@@ -26,7 +26,11 @@
 #include <linux/of_slimbus.h>
 #include <mach/sps.h>
 
-/* Per spec.max 40 bytes per received message */
+#ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE
+#include <linux/synaptics_i2c_rmi.h>
+int in_phone_call = 0;
+#endif
+
 #define SLIM_RX_MSGQ_BUF_LEN	40
 
 #define SLIM_USR_MC_GENERIC_ACK		0x25
@@ -232,8 +236,8 @@ enum mgr_intr {
 
 enum frm_cfg {
 	FRM_ACTIVE	= 1,
-	CLK_GEAR	= 10,
-	ROOT_FREQ	= 31,
+	CLK_GEAR	= 7,
+	ROOT_FREQ	= 11,
 	REF_CLK_GEAR	= 15,
 	INTR_WAKE	= 19,
 };
